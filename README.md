@@ -5,11 +5,14 @@ This repository implements and benchmarks multiple variants of a cuckoo hash **s
 ## Results at a glance
 
 <p align="center">
-  <img src="./results_10000x1000.png" alt="10,000 operations on 1,000 buckets — average execution time vs. threads" width="560">
+  <img src="./results_10000x1000.png" alt="Average execution time vs threads (log scale)" width="560">
 </p>
+<p align="center"><sub><em>10,000 operations · 1,000 buckets · average execution time vs. threads (log scale)</em></sub></p>
+
 <p align="center">
-  <img src="./results_100000x10000.png" alt="100,000 operations on 10,000 buckets — average execution time vs. threads" width="560">
+  <img src="./results_100000x10000.png" alt="Average execution time vs threads (log scale)" width="560">
 </p>
+<p align="center"><sub><em>100,000 operations · 10,000 buckets · average execution time vs. threads (log scale)</em></sub></p>
 
 *Reproduce:* see **Reproduce in 60s** below.
 
