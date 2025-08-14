@@ -63,5 +63,3 @@ Typical command-line options (check `benchmark.py -h` in your repo for the exact
 - **High thread counts:** **concurrent v2 (striped locks + atomics/early-exit)** scales best as contention rises.  
 - **Transactional (STM):** correctness-friendly, but retries under contention reduce throughput (expect slower curves at higher threads).  
 - **Unoptimized concurrent:** generally slowest due to coarse locking and cache contention.
-
-## Repository structure
