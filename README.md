@@ -5,10 +5,10 @@ This repository implements and benchmarks multiple variants of a cuckoo hash **s
 ## Results at a glance
 
 <p align="center">
-  <img src="results_100000x10000.png" alt="Throughput (ops/sec) vs. thread count for all variants" width="560">
+  <img src="./results_10000x1000.png" alt="10,000 operations on 1,000 buckets — average execution time vs. threads" width="560">
 </p>
 <p align="center">
-  <img src="results_10000x1000" alt="Scalability across bucket sizes and operation counts" width="560">
+  <img src="./results_100000x10000.png" alt="100,000 operations on 10,000 buckets — average execution time vs. threads" width="560">
 </p>
 
 *Reproduce:* see **Reproduce in 60s** below.
@@ -26,20 +26,17 @@ Each variant exposes set-style operations (e.g., `insert`, `contains`, `erase`) 
 
 ## Reproduce in 60s
 
+## Reproduce in 60s
+
 ```bash
-# 1) Build all variants
+# 1) Build all variants (root-level binaries: cuckoo_seq, cuckoo_seq_v2, cuckoo_con, cuckoo_con_v2, cuckoo_trans)
 make
 
-# 2) Run the benchmark suite (writes CSVs to ./results/ by default)
+# 2) Run the benchmark suite (writes CSVs to ./results/ if your script does so)
 python3 benchmark.py
 
-# 3) Generate figures (writes PNGs used above)
-# If your plot script supports custom outputs:
-python3 plot.py   --out-threads docs/plots/throughput_vs_threads.png   --out-buckets docs/plots/scalability_by_buckets.png
-
-# Otherwise (no flags), just run:
-# python3 plot.py
-# and copy or rename the produced figures into docs/plots/ as referenced above.
+# 3) Generate the two figures used above
+python3 plot.py  # produces the PNGs; 
 ```
 
 > **Notes**
@@ -68,23 +65,3 @@ Typical command-line options (check `benchmark.py -h` in your repo for the exact
 - **Unoptimized concurrent:** generally slowest due to coarse locking and cache contention.
 
 ## Repository structure
-
-```
-.
-├── src/                      # C++ sources for each variant
-├── Makefile                  # build all variants into separate executables
-├── benchmark.py              # runs parameter sweeps, writes CSV to ./results/
-├── plot.py                   # reads CSV and produces figures
-├── results/                  # CSV output (gitignored if large)
-└── docs/
-    └── plots/                # PNGs embedded in this README
-```
-
-## Tips
-- Keep `docs/plots/` images committed so reviewers see results without running anything.  
-- Include your exact **CPU model** and **compiler version** at the top of the README if you report specific numbers.  
-- For reproducibility, export `OMP_NUM_THREADS` where appropriate and pin CPU frequency if you care about microbench stability.
-
----
-
-If you use a different CLI for `plot.py`, adjust the `--out-*` names or drop the flags entirely. If you want, share your current `plot.py -h` and I’ll tailor this README’s commands exactly to your script.
